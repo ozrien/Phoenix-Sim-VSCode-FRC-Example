@@ -46,6 +46,15 @@ model {
             targetPlatform 'roborio'
             targetPlatform 'desktop'
 
+			/* ------ [CTRE] Added for Phoenix Simulation ------ */
+			sources {
+			    cpp.lib library: "PhoenixCCI", linkage: "static"
+			    cpp.lib library: "PhoenixAPI", linkage: "static"
+			    cpp.lib library: "PhoenixUTL", linkage: "static"
+			    cpp.lib library: "PhoenixSIM", linkage: "static"
+			}
+			/* ------ [/CTRE] Added for Phoenix Simulation ------ */
+
             sources.cpp {
                 source {
                     srcDir 'src/main/cpp'
@@ -78,6 +87,32 @@ model {
             useCppVendorLibraries(it)
         }
     }
+	/* ------ [CTRE] Added for Phoenix Simulation ------ */
+    repositories {
+        libs(PrebuiltLibraries) {
+            PhoenixCCI {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file('CTRE_PhoenixCCI.lib')
+                }
+            }
+            PhoenixAPI {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file('CTRE_Phoenix.lib')
+                }
+            }
+            PhoenixUTL {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file('CTRE_PhoenixCanutils.lib')
+                }
+            }
+            PhoenixSIM {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file('CTRE_PhoenixPlatform_sim.lib')
+                }
+            }
+        }
+    }
+	/* ------ [/CTRE] Added for Phoenix Simulation ------ */
 }
 
 wrapper {

@@ -5,9 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 #include "frc/IterativeRobot.h"
+#include "ctre/Phoenix.h"
 
 class Robot : public frc::IterativeRobot
 {
+	TalonSRX *_testMotor = new TalonSRX(1);
+
   public:
 	void RobotInit()
 	{
